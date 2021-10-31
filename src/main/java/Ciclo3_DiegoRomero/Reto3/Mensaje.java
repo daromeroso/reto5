@@ -13,17 +13,18 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "message")
 public class Mensaje implements Serializable {
-    @Id
+    @Id //Lave primaria
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //Variables
     private Integer idMessage;
     private String messageText;
-    
-    @ManyToOne
+    //Relaciones
+    @ManyToOne //Muchos a uno
     @JoinColumn(name="id")
     @JsonIgnoreProperties({"messages", "client", "reservations"})
     private Motorbike motorbike;
 
-    @ManyToOne
+    @ManyToOne //Muchos a uno
     @JoinColumn(name="clientId")
     @JsonIgnoreProperties({"messages", "reservations", "client"})
     private Cliente client;

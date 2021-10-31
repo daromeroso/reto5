@@ -17,27 +17,30 @@ import javax.persistence.Table;
 @Table(name = "motorbike")
 public class Motorbike implements Serializable{
     
-    @Id
+    @Id //Lave primaria
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String name;
+    //Variables
+    private Integer id; 
+    private String name; 
     private String brand;
     private Integer year;
     private String description;
-    
-    @ManyToOne
-    @JoinColumn(name = "categoryId")
-    @JsonIgnoreProperties("motorbikes")
+        
+    //Relaciones 
+    @ManyToOne //Relación Muchos a uno
+    @JoinColumn(name = "categoryId") //Llave de relación
+    @JsonIgnoreProperties("motorbikes") //Evita ciclo infito de la cat Motorbikes
     private Categoria category;
-
-    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "motorbike")
-    @JsonIgnoreProperties({"motorbike", "client"})
+    
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "motorbike") //Relación uno a muchos
+    @JsonIgnoreProperties({"motorbike", "client"}) //Evita ciclo infito de la cat Motorbikes, clientes
     private List<Mensaje> messages;
 
-    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "motorbike")
-    @JsonIgnoreProperties({"motorbike", "client"})
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "motorbike") //Relación uno a muchos
+    @JsonIgnoreProperties({"motorbike", "client"}) //Evita ciclo infito de la cat Motorbikes, clientes
     private List<Reservaciones> reservations;
-
+    
+    //Get and Set
     public Integer getId() {
         return id;
     }
@@ -101,7 +104,8 @@ public class Motorbike implements Serializable{
     public void setReservations(List<Reservaciones> reservations) {
         this.reservations = reservations;
     }
-    
+
+     
         
         
 }
